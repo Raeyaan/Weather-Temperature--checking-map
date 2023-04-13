@@ -1,6 +1,10 @@
 // Define the map and initialize variables
 var map = L.map('map').setView([51.505, -0.09], 13);
 var marker;
+const myIcon = L.icon({
+    iconUrl: 'myIcon.png',
+    // ...
+ });
 var openWeatherKey = '4b9aec12b64457eb5f23f987d32c4314';
 var openCageKey = 'e1cb51095a4d4ae5992fcdeaedddcdf3';
 
