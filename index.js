@@ -71,47 +71,55 @@ function geocodeAddress() {
                 var latLng = L.latLng(lat, lng);
                 placeMarker(latLng);
                 getWeather(lat, lng);
-            }
-            else if (data.results.length === 0) {
+            } else if (data.results.length === 0) {
                 alert('Address not found');
-            }
-
-
-            else {
-                if (document.getElementById('locations')) {
-                    document.getElementById('locations').remove();
-                }
-
-                // Create new select element and populate it with the results
-
-
-                var select = document.createElement('select');
-                select.setAttribute('id', 'locations');
-                data.results.forEach(result => {
-                    var option = document.createElement('option');
-                    option.value = result.formatted;
-                    option.textContent = result.formatted;
-                    select.appendChild(option);
+            } else {
+                // Filter out results with the same components object
+                var filteredResults = data.results.filter((result, index, self) => {
+                    return index === self.findIndex(r => (
+                        r.components.city === result.components.city &&
+                        r.components.state === result.components.state &&
+                        r.components.country === result.components.country
+                    ));
                 });
-                searchDiv = document.getElementById('search');
 
-                // Remove any existing select elements
-                var existingSelect = searchDiv.querySelector('select');
-                if (existingSelect) {
-                    searchDiv.removeChild(existingSelect);
-                }
+                if (filteredResults.length > 1) {
+                    // Create new select element and populate it with the filtered results
+                    var select = document.createElement('select');
+                    select.setAttribute('id', 'locations');
+                    filteredResults.forEach(result => {
+                        var option = document.createElement('option');
+                        option.value = result.formatted;
+                        option.textContent = result.formatted;
+                        select.appendChild(option);
+                    });
 
-                // Add new select element to search div
-                searchDiv.appendChild(select);
-                select.addEventListener('change', function () {
-                    var index = this.selectedIndex;
-                    var lat = data.results[index].geometry.lat;
-                    var lng = data.results[index].geometry.lng;
+                    // Remove any existing select elements
+                    var existingSelect = document.getElementById('locations');
+                    if (existingSelect) {
+                        existingSelect.remove();
+                    }
+
+                    // Add new select element to search div
+                    var searchDiv = document.getElementById('search');
+                    searchDiv.appendChild(select);
+
+                    select.addEventListener('change', function () {
+                        var index = this.selectedIndex;
+                        var lat = filteredResults[index].geometry.lat;
+                        var lng = filteredResults[index].geometry.lng;
+                        var latLng = L.latLng(lat, lng);
+                        placeMarker(latLng);
+                        getWeather(lat, lng);
+                    });
+                } else {
+                    // Only one result, so no need for a select element
+                    var lat = filteredResults[0].geometry.lat;
+                    var lng = filteredResults[0].geometry.lng;
                     var latLng = L.latLng(lat, lng);
                     placeMarker(latLng);
                     getWeather(lat, lng);
-                });
-
+                }
             }
         });
 }
