@@ -5,8 +5,9 @@ const myIcon = L.icon({
     iconUrl: 'myIcon.png',
     // ...
  });
-let openWeatherKey = '4b9aec12b64457eb5f23f987d32c4314';
-let openCageKey = 'e1cb51095a4d4ae5992fcdeaedddcdf3';
+
+const openWeatherKey = process.env.AUTH_TOKEN;
+const openCageKey = process.env.AUTH_TOKEN2;
 
 // Add the tile layer to the map
 
@@ -131,3 +132,4 @@ function geocodeAddress() {
             }
         });
 }
+
