@@ -1,4 +1,5 @@
-// Define the map and initialize variables
+
+//(); Define the map and initialize variables
 let map = L.map('map').setView([51.505, -0.09], 13);
 let marker;
 const myIcon = L.icon({
@@ -6,8 +7,8 @@ const myIcon = L.icon({
     // ...
  });
 
-const openWeatherKey = process.env.AUTH_TOKEN;
-const openCageKey = process.env.AUTH_TOKEN2;
+const openWeatherKey = '4b9aec12b64457eb5f23f987d32c4314';
+const openCageKey = 'e1cb51095a4d4ae5992fcdeaedddcdf3';
 
 // Add the tile layer to the map
 
