@@ -5,6 +5,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
+
+app.set("views", process.cwd() + "/views");
+app.set("view engine", "ejs");
 app.use(express.static('lib'));
 app.use(express.static('images'));
 app.use(express.static('views'));
@@ -15,9 +18,9 @@ const openWeatherKey = process.env.AUTH_TOKEN;
 const openCageKey = process.env.AUTH_TOKEN2;
 
 
-app.set("views", __dirname + "/views");
-app.set("view engine", "ejs");
-app.use(express.static(__dirname + "public"));
+;
+
+
 
 app.get('/', (req, res) => {
   res.render('index');
