@@ -5,7 +5,6 @@ This is a simple web application that allows users to search for a location and 
 The application uses the **OpenStreetMap** tiles and **Leaflet** library for the map display. It also uses the **OpenCage** Geocoding API to convert user-entered addresses into latitude and longitude coordinates, and the **OpenWeatherMap** API to retrieve weather information for a given location.
 
 Usage
-To use the application, simply open **index.html** in your web browser. The application will load a map of the world centered on the UK, and a search bar at the top right corner of the screen.
 
 To search for a location, enter an address or location in the search bar and click on the **Search** button. The application will drop a pin on the map at the location of the address, and display the current temperature at that location in a popup.
 
