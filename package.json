@@ -8,7 +8,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "start": "start http://localhost:3000 && node App.js"
+    "start": "start http://localhost:3000 && node index.js"
   },
   "author": "",
   "license": "ISC",
