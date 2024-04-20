@@ -15,7 +15,9 @@ const openWeatherKey = process.env.AUTH_TOKEN;
 const openCageKey = process.env.AUTH_TOKEN2;
 
 
-app.set('view engine', 'ejs');
+app.set("views", __dirname + "/views");
+app.set("view engine", "ejs");
+app.use(express.static(__dirname + "public"));
 
 app.get('/', (req, res) => {
   res.render('index');
